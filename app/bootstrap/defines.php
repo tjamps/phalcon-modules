@@ -23,17 +23,28 @@
  * SOFTWARE.
  */
 
-define('ROOT_PATH', dirname(__DIR__));
-require ROOT_PATH . '/app/bootstrap/bootstrap.php';
+/**
+ * @var string
+ * 	Absolute path to the 'app' directory.
+ */
+define('APP_PATH', ROOT_PATH . '/app');
 
-try {
-	$application = new FreeForAll\PhalconModules\Application();
-	// ROCK'N'ROLL
-	echo $application->bootstrap()->run();
-}
-catch (\Exception $e) {
-	echo get_class($e) . ': ' . $e->getMessage();
-	echo '<pre>';
-	echo $e->getTraceAsString();
-	echo '</pre>';
-}
+/**
+ * @var string
+ * 	Absolute path to the 'app/bootstrap' directory.
+ */
+define('BOOTSTRAP_PATH', APP_PATH . '/bootstrap');
+
+/**
+ * @var string
+ * 	Absolute path to the 'app/modules' directory.
+ */
+define('MODULES_PATH', APP_PATH . '/modules');
+
+/**
+ * @var string
+ * 	Absolute path to the 'app/config' directory.
+ */
+define('CONFIG_PATH', APP_PATH . '/config');
+
+

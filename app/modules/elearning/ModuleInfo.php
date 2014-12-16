@@ -23,17 +23,26 @@
  * SOFTWARE.
  */
 
-define('ROOT_PATH', dirname(__DIR__));
-require ROOT_PATH . '/app/bootstrap/bootstrap.php';
+namespace FreeForAll\Modules\Elearning;
 
-try {
-	$application = new FreeForAll\PhalconModules\Application();
-	// ROCK'N'ROLL
-	echo $application->bootstrap()->run();
-}
-catch (\Exception $e) {
-	echo get_class($e) . ': ' . $e->getMessage();
-	echo '<pre>';
-	echo $e->getTraceAsString();
-	echo '</pre>';
+/**
+ * 
+ */
+class ModuleInfo
+{
+	/**
+	 * Register module autoloaders.
+	 */
+	public function registerAutoloaders()
+	{
+		
+	}
+	
+	/**
+	 * Register module services.
+	 */
+	public function registerServices($di)
+	{
+		
+	}
 }
