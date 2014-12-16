@@ -30,19 +30,19 @@ namespace FreeForAll\Modules\Core;
  */
 class ModuleInfo
 {
-	/**
-	 * Register module autoloaders.
-	 */
-	public function registerAutoloaders()
-	{
-		
-	}
-	
-	/**
-	 * Register module services.
-	 */
-	public function registerServices($di)
-	{
-		
-	}
+    /**
+     * Register module autoloaders.
+     */
+    public function registerAutoloaders()
+    {
+        
+    }
+    
+    /**
+     * Register module services.
+     */
+    public function registerServices($di)
+    {
+        
+    }
 }

@@ -27,13 +27,13 @@ define('ROOT_PATH', dirname(__DIR__));
 require ROOT_PATH . '/app/bootstrap/bootstrap.php';
 
 try {
-	$application = new FreeForAll\Application();
-	// ROCK'N'ROLL
-	echo $application->bootstrap()->run();
+    $application = new FreeForAll\Application();
+    // ROCK'N'ROLL
+    echo $application->bootstrap()->run();
 }
 catch (\Exception $e) {
-	echo get_class($e) . ': ' . $e->getMessage();
-	echo '<pre>';
-	echo $e->getTraceAsString();
-	echo '</pre>';
+    echo get_class($e) . ': ' . $e->getMessage();
+    echo '<pre>';
+    echo $e->getTraceAsString();
+    echo '</pre>';
 }

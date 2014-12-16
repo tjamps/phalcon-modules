@@ -25,25 +25,25 @@
 
 /**
  * @var string
- * 	Absolute path to the 'app' directory.
+ *  Absolute path to the 'app' directory.
  */
 define('APP_PATH', ROOT_PATH . '/app');
 
 /**
  * @var string
- * 	Absolute path to the 'app/bootstrap' directory.
+ *  Absolute path to the 'app/bootstrap' directory.
  */
 define('BOOTSTRAP_PATH', APP_PATH . '/bootstrap');
 
 /**
  * @var string
- * 	Absolute path to the 'app/modules' directory.
+ *  Absolute path to the 'app/modules' directory.
  */
 define('MODULES_PATH', APP_PATH . '/modules');
 
 /**
  * @var string
- * 	Absolute path to the 'app/config' directory.
+ *  Absolute path to the 'app/config' directory.
  */
 define('CONFIG_PATH', APP_PATH . '/config');
 

@@ -30,5 +30,5 @@ namespace FreeForAll\Modules\Core\Controllers;
  */
 abstract class ControllerBase extends \Phalcon\Mvc\Controller
 {
-	
+    
 }

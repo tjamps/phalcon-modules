@@ -30,20 +30,20 @@ namespace FreeForAll\Application\Controllers;
  */
 class ErrorController extends \Phalcon\Mvc\Controller
 {
-	/**
-	 * This method is called whenever
-	 * the requested URL matches no route.
-	 * 
-	 * @return \Phalcon\Http\Response
-	 * 		A 404 Not Found response.
-	 */
-	public function notFoundAction()
-	{
-		$response = new \Phalcon\Http\Response();
-		
-		$response->setStatusCode(404, 'Not Found');
-		$response->setContentType('text/html', 'UTF-8');
-		
-		return $response;
-	}
+    /**
+     * This method is called whenever
+     * the requested URL matches no route.
+     * 
+     * @return \Phalcon\Http\Response
+     *      A 404 Not Found response.
+     */
+    public function notFoundAction()
+    {
+        $response = new \Phalcon\Http\Response();
+        
+        $response->setStatusCode(404, 'Not Found');
+        $response->setContentType('text/html', 'UTF-8');
+        
+        return $response;
+    }
 }
