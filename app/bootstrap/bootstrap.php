@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-namespace FreeForAll\PhalconModules;
+namespace FreeForAll;
 
 /**
  * 
@@ -33,7 +33,7 @@ class Application extends \Phalcon\Mvc\Application
 	/**
 	 * Bootstrap the current application.
 	 * 
-	 * @return \FreeForAll\PhalconModules\Application
+	 * @return \FreeForAll\Application
 	 * 		The current object, to allow method chaining.
 	 */
 	public function bootstrap()
@@ -41,6 +41,7 @@ class Application extends \Phalcon\Mvc\Application
 		$this->includeApplicationFiles();
 		$this->setLoader();
 		$this->registerGlobalServices();
+		$this->registerApplicationModules();
 		
 		return $this;
 	}
@@ -75,7 +76,11 @@ class Application extends \Phalcon\Mvc\Application
 	 */
 	private function setLoader()
 	{
-		$loader = new \Phalcon\Loader();	
+		$loader = new \Phalcon\Loader();
+
+		$loader->registerNamespaces(array(
+			'FreeForAll\Application\Controllers' => APP_PATH . '/controllers',
+		))->register();
 	}
 	
 	/**
@@ -96,6 +101,20 @@ class Application extends \Phalcon\Mvc\Application
 			
 			return $view;
 		}, TRUE);
+		
+		// The application router skips default route mounting,
+		// and registers the default not found action.
+		$di->set('router', function() {
+			$router = new \Phalcon\Mvc\Router(FALSE);
+			
+			$router->notFound(array(
+				'namespace' => 'FreeForAll\Application\Controllers',
+				'controller' => 'error',
+				'action' => 'notFound',
+			));
+
+			return $router;
+		});
 		
 		$this->setDI($di);
 	}
