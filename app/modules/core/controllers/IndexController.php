@@ -23,36 +23,15 @@
  * SOFTWARE.
  */
 
-namespace FreeForAll\Modules\Core;
+namespace FreeForAll\Modules\Core\Controllers; 
 
 /**
  * 
  */
-class ModuleInfo
+class IndexController extends ControllerBase
 {
-    /**
-     * Register module autoloaders.
-     */
-    public function registerAutoloaders($di)
-    {
-    	$loader = new \Phalcon\Loader();
-    	$loader->registerNamespaces(array(
-    		'FreeForAll\Modules\Core\Controllers' => MODULES_PATH . '/core/controllers'
-    	))->register();
-    }
-    
-    /**
-     * Register module services.
-     * 
-     * @param \Phalcon\DI $di
-     * 		Project Dependency Injection object.
-     */
-    public function registerServices($di)
-    {
-    	
-    }
+   public function indexAction()
+   {
+		echo 'Core::IndexController::indexAction';
+   }
 }
-
-
-
-

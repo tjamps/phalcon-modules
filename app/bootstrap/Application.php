@@ -30,6 +30,7 @@ namespace FreeForAll;
  */
 class Application extends \Phalcon\Mvc\Application
 {
+	
     /**
      * Bootstrap the current application.
      * 
@@ -40,8 +41,8 @@ class Application extends \Phalcon\Mvc\Application
     {
         $this->includeApplicationFiles();
         $this->setLoader();
-        $this->registerGlobalServices();
         $this->registerApplicationModules();
+        $this->registerGlobalServices();
         
         return $this;
     }
@@ -56,7 +57,6 @@ class Application extends \Phalcon\Mvc\Application
     {
         return $this->handle()->getContent();
     }
-    
     
     /**
      * Includes application files.
@@ -80,6 +80,7 @@ class Application extends \Phalcon\Mvc\Application
 
         $loader->registerNamespaces(array(
             'FreeForAll\Application\Controllers' => APP_PATH . '/controllers',
+        	'FreeForAll\Application\Utils' => APP_PATH . '/utils',
         ))->register();
     }
     
@@ -97,23 +98,28 @@ class Application extends \Phalcon\Mvc\Application
         // Disable views completely.
         $di->set('view', function(){
             $view = new \Phalcon\Mvc\View();
+            
             $view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
             
             return $view;
         }, TRUE);
         
-        // The application router skips default route mounting,
-        // and registers the default not found action.
+        
         $di->set('router', function() {
-            $router = new \Phalcon\Mvc\Router(FALSE);
-            
-            $router->notFound(array(
-                'namespace' => 'FreeForAll\Application\Controllers',
-                'controller' => 'error',
-                'action' => 'notFound',
-            ));
+        	$router = new \Phalcon\Mvc\Router(FALSE);
 
-            return $router;
+	    	$router->notFound(array(
+	    		'namespace' => 'FreeForAll\Application\Controllers',
+	    		'controller' => 'error',
+	    		'action' => 'notFound',
+	    	));
+	    	
+	    	$router->removeExtraSlashes(TRUE);
+	    	
+	    	// Add modules custom routes.
+	    	$this->mountModulesRoutes($router);
+	    	
+	    	return $router;
         });
         
         $this->setDI($di);
@@ -124,16 +130,34 @@ class Application extends \Phalcon\Mvc\Application
      */
     private function registerApplicationModules()
     {
-        $this->registerModules(array(
-            'core' => array(
-                'className' => 'FreeForAll\Modules\Core\ModuleInfo',
-                'path' => MODULES_PATH . '/core/ModuleInfo.php',
-            ),
-            'elearning' => array(
-                'className' => 'FreeForAll\Modules\Elearning\ModuleInfo',
-                'path' => MODULES_PATH . '/elearning/ModuleInfo.php',
-            ),
-        ));
+    	$modules = array();
+    	$modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
+    	 
+    	foreach ($modulesInfo as $moduleName => $moduleInfo) {
+    		$modules[$moduleName] = array(
+    			'className' => $moduleInfo['infoClassName'],
+    			'path' => $moduleInfo['infoFilename'],
+    		);
+    	}
+    	
+    	$this->registerModules($modules);
+    }
+    
+    /**
+     * Mount all modules routes available.
+     * 
+     * @param \Phalcon\Mvc\Router $router
+     */
+    private function mountModulesRoutes($router)
+    {
+    	$modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
+    	
+    	foreach ($modulesInfo as $module) {
+    		if (isset($module['routeFilename'])) {
+    			require $module['routeFilename'];
+    			$router->mount(new $module['routeClassName']);
+    		}
+    	}
     }
 }
 

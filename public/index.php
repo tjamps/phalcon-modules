@@ -24,11 +24,11 @@
  */
 
 define('ROOT_PATH', dirname(__DIR__));
-require ROOT_PATH . '/app/bootstrap/bootstrap.php';
+require ROOT_PATH . '/app/bootstrap/Application.php';
 
 try {
-    $application = new FreeForAll\Application();
     // ROCK'N'ROLL
+    $application = new \FreeForAll\Application();
     echo $application->bootstrap()->run();
 }
 catch (\Exception $e) {

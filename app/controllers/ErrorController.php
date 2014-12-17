@@ -47,3 +47,4 @@ class ErrorController extends \Phalcon\Mvc\Controller
         return $response;
     }
 }
+

@@ -28,31 +28,25 @@ namespace FreeForAll\Modules\Core;
 /**
  * 
  */
-class ModuleInfo
+class Routes extends \Phalcon\Mvc\Router\Group
 {
-    /**
-     * Register module autoloaders.
-     */
-    public function registerAutoloaders($di)
-    {
-    	$loader = new \Phalcon\Loader();
-    	$loader->registerNamespaces(array(
-    		'FreeForAll\Modules\Core\Controllers' => MODULES_PATH . '/core/controllers'
-    	))->register();
-    }
-    
-    /**
-     * Register module services.
-     * 
-     * @param \Phalcon\DI $di
-     * 		Project Dependency Injection object.
-     */
-    public function registerServices($di)
-    {
-    	
-    }
+	/**
+	 * 
+	 */
+	public function initialize()
+	{
+		$this->setPrefix('/core');
+
+		$this->setPaths(array(
+			'module' => 'core',
+			'namespace' => 'FreeForAll\Modules\Core\Controllers',
+			'controller' => 'index',
+		));
+		
+		$this->addGet('', array(
+			'action' => 'index',
+		));
+	}
 }
-
-
 
 
