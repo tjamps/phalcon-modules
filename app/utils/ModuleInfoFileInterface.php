@@ -30,32 +30,32 @@ namespace FreeForAll\Application\Utils;
  */
 interface ModuleInfoFileInterface
 {
-	
-	/**
-	 * Get the module system name.
-	 * 
-	 * The module system name is the lowercase name 
-	 * of the directory that contains the module.
-	 * 
-	 * @return string
-	 * 		The system name of the module.
-	 */
-	public function getSystemName();
-	
-	/**
-	 * Register module services.
-	 *
-	 * @param \Phalcon\DI $di
-	 *      Project Dependency Injection object.
-	 */
-	public function registerServices($di);
-	
-	/**
-	 * Register module autoloaders.
-	 * 
-	 * @param \Phalcon\DI $di
-	 *      Project Dependency Injection object.
-	 */
-	public function registerAutoloaders($di);
+    
+    /**
+     * Get the module system name.
+     * 
+     * The module system name is the lowercase name 
+     * of the directory that contains the module.
+     * 
+     * @return string
+     *      The system name of the module.
+     */
+    public function getSystemName();
+    
+    /**
+     * Register module services.
+     *
+     * @param \Phalcon\DI $di
+     *      Project Dependency Injection object.
+     */
+    public function registerServices($di);
+    
+    /**
+     * Register module autoloaders.
+     * 
+     * @param \Phalcon\DI $di
+     *      Project Dependency Injection object.
+     */
+    public function registerAutoloaders($di);
 }
 

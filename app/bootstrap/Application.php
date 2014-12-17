@@ -30,8 +30,8 @@ namespace FreeForAll;
  */
 class Application extends \Phalcon\Mvc\Application
 {
-	
-	protected $environment;
+    
+    protected $environment;
     
     /**
      * Bootstrap the current application.
@@ -42,7 +42,7 @@ class Application extends \Phalcon\Mvc\Application
     public function bootstrap()
     {
         $this->includeApplicationFiles();
-    	$this->setEnvironment();
+        $this->setEnvironment();
         $this->setLoader();
         $this->registerApplicationModules();
         $this->registerGlobalServices();
@@ -75,34 +75,34 @@ class Application extends \Phalcon\Mvc\Application
      */
     private function setEnvironment()
     {
-    	error_reporting(E_ALL);
-    	
-    	$environment = getenv('APPLICATION_ENV');
-    	if ($environment === FALSE) {
-    		$environment = 'production';
-    	}
-    	
-    	switch ($environment) {
-    		case 'develop':
-    			$this->environment = 'develop';
-    			break;
-    		case 'staging':
-    			$this->environment = 'staging';
-    			break;
-    		case 'testing':
-    			$this->environment = 'testing';
-    			break;
-    		case 'production':
-    		default:
-    			$this->environment = 'production';
-    			break;
-    	}
-    	
-    	define('APPLICATION_ENV', $this->environment);
-    	
-    	// TODO: add application logfile ?
-    	// TODO: set_error_handler() ?
-    	// TODO: set_exception_handler() ?
+        error_reporting(E_ALL);
+        
+        $environment = getenv('APPLICATION_ENV');
+        if ($environment === FALSE) {
+            $environment = 'production';
+        }
+        
+        switch ($environment) {
+            case 'develop':
+                $this->environment = 'develop';
+                break;
+            case 'staging':
+                $this->environment = 'staging';
+                break;
+            case 'testing':
+                $this->environment = 'testing';
+                break;
+            case 'production':
+            default:
+                $this->environment = 'production';
+                break;
+        }
+        
+        define('APPLICATION_ENV', $this->environment);
+        
+        // TODO: add application logfile ?
+        // TODO: set_error_handler() ?
+        // TODO: set_exception_handler() ?
     }
     
     /**

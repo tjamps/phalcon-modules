@@ -30,18 +30,18 @@ namespace FreeForAll\Modules\Core;
  */
 class ModuleInfo extends \FreeForAll\Application\Utils\AbstractModuleInfoFile
 {
-	
-	public function getSystemName()
-	{
-		return 'core';
-	}
+    
+    public function getSystemName()
+    {
+        return 'core';
+    }
 
-	/**
-   	 * @see \FreeForAll\Application\Utils\ModuleInfoFileInterface::registerAutoloaders()
-   	 */
+    /**
+     * @see \FreeForAll\Application\Utils\ModuleInfoFileInterface::registerAutoloaders()
+     */
     public function registerAutoloaders($di)
     {
-    	$this->registerCommonNamespaces();
+        $this->registerCommonNamespaces();
     }
     
     /**

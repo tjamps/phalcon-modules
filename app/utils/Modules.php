@@ -78,7 +78,7 @@ class Modules
                     'infoClassName' => $moduleInfoClassName,
                     'routeFilename' => $routeFilename,
                     'routeClassName' => $routeClassName,
-                	'modulePath' => $modulePath,
+                    'modulePath' => $modulePath,
                 );
             }
         }
@@ -95,8 +95,8 @@ class Modules
      */
     public static function getModuleInfo($systemName)
     {
-    	self::getModulesInfo();
-    	return isset(self::$info[$systemName]) ? self::$info[$systemName] : FALSE;
+        self::getModulesInfo();
+        return isset(self::$info[$systemName]) ? self::$info[$systemName] : FALSE;
     }
     
     
@@ -107,7 +107,7 @@ class Modules
      * it contains a "ModuleInfo.php" file.
      * 
      * @return array
-     * 		The list of available modules directories.
+     *      The list of available modules directories.
      * 
      * TODO: a ModuleInfo class must extend \FreeForAll\Utils\AbstractModuleInfoFile,
      * find an efficient way to ensure it really is. 
