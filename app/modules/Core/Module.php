@@ -23,19 +23,19 @@
  * SOFTWARE.
  */
 
-namespace FreeForAll\Modules\Elearning;
+namespace FreeForAll\Modules\Core;
 
 /**
  * 
  */
-class ModuleInfo extends \FreeForAll\Modules\AbstractModuleInfoFile
+class Module extends \FreeForAll\Modules\AbstractModule
 {
     /**
      * @see \FreeForAll\Modules\AbstractModuleInfoFile
      */
     public function getSystemName()
     {
-        return 'Elearning';
+        return 'Core';
     }
 
     /**
@@ -52,3 +52,7 @@ class ModuleInfo extends \FreeForAll\Modules\AbstractModuleInfoFile
     {
     }
 }
+
+
+
+

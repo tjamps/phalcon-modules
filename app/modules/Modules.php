@@ -56,8 +56,8 @@ class Modules
                 
                 $moduleNamespace = "FreeForAll\Modules\\$moduleName";
                 
-                $moduleInfoFilename = MODULES_PATH. "/$directoryName/ModuleInfo.php";
-                $moduleInfoClassName = "$moduleNamespace\ModuleInfo";
+                $moduleInfoFilename = MODULES_PATH. "/$directoryName/Module.php";
+                $moduleInfoClassName = "$moduleNamespace\Module";
                 
                 // Test if the module Routes.php file exists.
                 $routeFilename = MODULES_PATH . "/$directoryName/Routes.php";
@@ -120,7 +120,7 @@ class Modules
             $directoryContent = scandir(MODULES_PATH);
             foreach ($directoryContent as $entry) {
                 $entryPath = MODULES_PATH . '/' . $entry;
-                $moduleInfoFilename = $entryPath . '/ModuleInfo.php';
+                $moduleInfoFilename = $entryPath . '/Module.php';
                 
                 if ($entry !== '.' && $entry !== '..' && is_dir($entryPath) && file_exists($moduleInfoFilename)) {
                     $names[] = $entry;

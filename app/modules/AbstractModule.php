@@ -28,7 +28,7 @@ namespace FreeForAll\Modules;
 /**
  * 
  */
-abstract class AbstractModuleInfoFile implements \Phalcon\Mvc\ModuleDefinitionInterface
+abstract class AbstractModule implements \Phalcon\Mvc\ModuleDefinitionInterface
 {
     
     /**
