@@ -23,14 +23,25 @@
  * SOFTWARE.
  */
 
-namespace FreeForAll\Application\Utils;
+namespace FreeForAll\Modules;
 
 /**
  * 
  */
-abstract class AbstractModuleInfoFile implements ModuleInfoFileInterface
+abstract class AbstractModuleInfoFile implements \Phalcon\Mvc\ModuleDefinitionInterface
 {
     
+    /**
+     * Get the module system name.
+     * 
+     * The module system name is the lowercase name 
+     * of the directory that contains the module.
+     * 
+     * @return string
+     *      The system name of the module.
+     */
+    public abstract function getSystemName();
+
     /**
      * Get module configuration.
      * 
@@ -61,30 +72,6 @@ abstract class AbstractModuleInfoFile implements ModuleInfoFileInterface
         }
         
         return $config;
-    }
-    
-    /**
-     * Registers common module namespaces.
-     */
-    public function registerCommonNamespaces()
-    {
-        $systemName = $this->getSystemName();
-        $info = Modules::getModuleInfo($systemName);
-        
-        if ($info) {
-            $config = $this->getConfig();
-            $moduleName = $info['name'];
-            $modulePath = $info['modulePath'];
-            
-            $loader = new \Phalcon\Loader();
-            
-            $loader->registerNamespaces(array(
-                "FreeForAll\Modules\\$moduleName\Controllers" => $modulePath . '/' . $config->{$systemName}->controllersDir,
-                "FreeForAll\Modules\\$moduleName\Models"      => $modulePath . '/' . $config->{$systemName}->modelsDir,
-                "FreeForAll\Modules\\$moduleName\Exceptions"  => $modulePath . '/' . $config->{$systemName}->exceptionsDir,
-            ))->register();
-        }
-        
     }
 }
 

@@ -66,7 +66,7 @@ class Application extends \Phalcon\Mvc\Application
      */
     private function includeApplicationFiles()
     {
-        require ROOT_PATH . '/app/includes/defines.php';
+        require ROOT_PATH . '/app/bootstrap/defines.php';
     }
     
     /**
@@ -117,8 +117,7 @@ class Application extends \Phalcon\Mvc\Application
         $loader = new \Phalcon\Loader();
 
         $loader->registerNamespaces(array(
-            'FreeForAll\Application\Controllers' => APP_PATH . '/controllers',
-            'FreeForAll\Application\Utils'       => APP_PATH . '/utils',
+            'FreeForAll\Modules' => APP_PATH . '/modules',
         ))->register();
     }
     
@@ -147,7 +146,7 @@ class Application extends \Phalcon\Mvc\Application
             $router = new \Phalcon\Mvc\Router(FALSE);
 
             $router->notFound(array(
-                'namespace'  => 'FreeForAll\Application\Controllers',
+                'namespace'  => 'FreeForAll\Modules\Core\Controllers',
                 'controller' => 'error',
                 'action'     => 'notFound',
             ));
@@ -169,13 +168,13 @@ class Application extends \Phalcon\Mvc\Application
     private function registerApplicationModules()
     {
         $modules = array();
-        $modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
+        $modulesInfo = \FreeForAll\Modules\Modules::getModulesInfo();
          
         foreach ($modulesInfo as $moduleName => $moduleInfo) {
             $modules[$moduleName] = array(
                 'className' => $moduleInfo['infoClassName'],
                 'path'      => $moduleInfo['infoFilename'],
-            );
+            );            
         }
         
         $this->registerModules($modules);
@@ -188,7 +187,7 @@ class Application extends \Phalcon\Mvc\Application
      */
     private function mountModulesRoutes($router)
     {
-        $modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
+        $modulesInfo = \FreeForAll\Modules\Modules::getModulesInfo();
         
         foreach ($modulesInfo as $module) {
             if (isset($module['routeFilename'])) {

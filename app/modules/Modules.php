@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-namespace FreeForAll\Application\Utils;
+namespace FreeForAll\Modules;
 
 /**
  * 

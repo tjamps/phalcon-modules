@@ -38,7 +38,7 @@ class Routes extends \Phalcon\Mvc\Router\Group
         $this->setPrefix('/core');
 
         $this->setPaths(array(
-            'module' => 'core',
+            'module' => 'Core',
             'namespace' => 'FreeForAll\Modules\Core\Controllers',
             'controller' => 'index',
         ));

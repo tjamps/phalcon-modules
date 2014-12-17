@@ -28,21 +28,27 @@ namespace FreeForAll\Modules\Elearning;
 /**
  * 
  */
-class ModuleInfo
+class ModuleInfo extends \FreeForAll\Modules\AbstractModuleInfoFile
 {
     /**
-     * Register module autoloaders.
+     * @see \FreeForAll\Modules\AbstractModuleInfoFile
      */
-    public function registerAutoloaders()
+    public function getSystemName()
     {
-        
+        return 'Elearning';
+    }
+
+    /**
+     * @see \Phalcon\Mvc\ModuleDefinitionInterface
+     */
+    public function registerAutoloaders($di)
+    {
     }
     
     /**
-     * Register module services.
+     * @see \Phalcon\Mvc\ModuleDefinitionInterface
      */
     public function registerServices($di)
     {
-        
     }
 }

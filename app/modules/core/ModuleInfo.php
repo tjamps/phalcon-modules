@@ -28,25 +28,25 @@ namespace FreeForAll\Modules\Core;
 /**
  * 
  */
-class ModuleInfo extends \FreeForAll\Application\Utils\AbstractModuleInfoFile
+class ModuleInfo extends \FreeForAll\Modules\AbstractModuleInfoFile
 {
-    
+    /**
+     * @see \FreeForAll\Modules\AbstractModuleInfoFile
+     */
     public function getSystemName()
     {
-        return 'core';
+        return 'Core';
     }
 
     /**
-     * @see \FreeForAll\Application\Utils\ModuleInfoFileInterface::registerAutoloaders()
+     * @see \Phalcon\Mvc\ModuleDefinitionInterface
      */
     public function registerAutoloaders($di)
     {
-        $this->registerCommonNamespaces();
     }
     
     /**
-     * 
-     * @see \FreeForAll\Application\Utils\ModuleInfoFileInterface::registerServices()
+     * @see \Phalcon\Mvc\ModuleDefinitionInterface
      */
     public function registerServices($di)
     {

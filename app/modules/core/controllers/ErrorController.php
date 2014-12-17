@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-namespace FreeForAll\Application\Controllers; 
+namespace FreeForAll\Modules\Core\Controllers; 
 
 /**
  * 
