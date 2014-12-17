@@ -28,28 +28,28 @@ namespace FreeForAll\Modules\Core;
 /**
  * 
  */
-class ModuleInfo
+class ModuleInfo extends \FreeForAll\Application\Utils\AbstractModuleInfoFile
 {
-    /**
-     * Register module autoloaders.
-     */
+	
+	public function getSystemName()
+	{
+		return 'core';
+	}
+
+	/**
+   	 * @see \FreeForAll\Application\Utils\ModuleInfoFileInterface::registerAutoloaders()
+   	 */
     public function registerAutoloaders($di)
     {
-        $loader = new \Phalcon\Loader();
-        $loader->registerNamespaces(array(
-            'FreeForAll\Modules\Core\Controllers' => MODULES_PATH . '/core/controllers'
-        ))->register();
+    	$this->registerCommonNamespaces();
     }
     
     /**
-     * Register module services.
      * 
-     * @param \Phalcon\DI $di
-     *      Project Dependency Injection object.
+     * @see \FreeForAll\Application\Utils\ModuleInfoFileInterface::registerServices()
      */
     public function registerServices($di)
     {
-        
     }
 }
 

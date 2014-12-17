@@ -34,7 +34,7 @@ class Modules
      * @var array
      *      Stores module information.
      */
-    static $info = NULL;
+    protected static $info = NULL;
     
     /**
      * Get all available modules information.
@@ -54,21 +54,22 @@ class Modules
             foreach ($directoryNames as $directoryName) {
                 $moduleName = ucfirst($directoryName);
                 
-                $moduleNamespace = 'FreeForAll\Modules\\' . $moduleName;
+                $moduleNamespace = "FreeForAll\Modules\\$moduleName";
                 
-                $moduleInfoFilename = MODULES_PATH. '/' . $directoryName . '/ModuleInfo.php';
-                $moduleInfoClassName = $moduleNamespace . '\ModuleInfo';
+                $moduleInfoFilename = MODULES_PATH. "/$directoryName/ModuleInfo.php";
+                $moduleInfoClassName = "$moduleNamespace\ModuleInfo";
                 
                 // Test if the module Routes.php file exists.
-                $routeFilename = MODULES_PATH . '/' . $directoryName . '/Routes.php';
+                $routeFilename = MODULES_PATH . "/$directoryName/Routes.php";
                 if (file_exists($routeFilename)) {
-                    $routeClassName = $moduleNamespace . '\Routes';
+                    $routeClassName = "$moduleNamespace\Routes";
                 }
                 else {
                     $routeFilename = NULL;
                     $routeClassName = NULL;
                 }
-                // TODO: Test if the module config/config.ini file exists.
+                
+                $modulePath = MODULES_PATH . "/$directoryName";
                 
                 self::$info[$directoryName] = array(
                     'name' => $moduleName,
@@ -77,11 +78,25 @@ class Modules
                     'infoClassName' => $moduleInfoClassName,
                     'routeFilename' => $routeFilename,
                     'routeClassName' => $routeClassName,
+                	'modulePath' => $modulePath,
                 );
             }
         }
         
         return self::$info;
+    }
+    
+    
+    /**
+     * 
+     * @param string $systemName
+     * 
+     * @return boolean|array
+     */
+    public static function getModuleInfo($systemName)
+    {
+    	self::getModulesInfo();
+    	return isset(self::$info[$systemName]) ? self::$info[$systemName] : FALSE;
     }
     
     
@@ -92,6 +107,10 @@ class Modules
      * it contains a "ModuleInfo.php" file.
      * 
      * @return array
+     * 		The list of available modules directories.
+     * 
+     * TODO: a ModuleInfo class must extend \FreeForAll\Utils\AbstractModuleInfoFile,
+     * find an efficient way to ensure it really is. 
      */
     private static function getModuleDirectoriesNames()
     {

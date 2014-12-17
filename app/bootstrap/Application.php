@@ -30,6 +30,8 @@ namespace FreeForAll;
  */
 class Application extends \Phalcon\Mvc\Application
 {
+	
+	protected $environment;
     
     /**
      * Bootstrap the current application.
@@ -40,6 +42,7 @@ class Application extends \Phalcon\Mvc\Application
     public function bootstrap()
     {
         $this->includeApplicationFiles();
+    	$this->setEnvironment();
         $this->setLoader();
         $this->registerApplicationModules();
         $this->registerGlobalServices();
@@ -63,8 +66,43 @@ class Application extends \Phalcon\Mvc\Application
      */
     private function includeApplicationFiles()
     {
-        require ROOT_PATH . '/app/bootstrap/defines.php';
-        require ROOT_PATH . '/app/bootstrap/env.php';
+        require ROOT_PATH . '/app/includes/defines.php';
+    }
+    
+    /**
+     * 
+     * 
+     */
+    private function setEnvironment()
+    {
+    	error_reporting(E_ALL);
+    	
+    	$environment = getenv('APPLICATION_ENV');
+    	if ($environment === FALSE) {
+    		$environment = 'production';
+    	}
+    	
+    	switch ($environment) {
+    		case 'develop':
+    			$this->environment = 'develop';
+    			break;
+    		case 'staging':
+    			$this->environment = 'staging';
+    			break;
+    		case 'testing':
+    			$this->environment = 'testing';
+    			break;
+    		case 'production':
+    		default:
+    			$this->environment = 'production';
+    			break;
+    	}
+    	
+    	define('APPLICATION_ENV', $this->environment);
+    	
+    	// TODO: add application logfile ?
+    	// TODO: set_error_handler() ?
+    	// TODO: set_exception_handler() ?
     }
     
     /**
@@ -80,7 +118,7 @@ class Application extends \Phalcon\Mvc\Application
 
         $loader->registerNamespaces(array(
             'FreeForAll\Application\Controllers' => APP_PATH . '/controllers',
-            'FreeForAll\Application\Utils' => APP_PATH . '/utils',
+            'FreeForAll\Application\Utils'       => APP_PATH . '/utils',
         ))->register();
     }
     
@@ -109,9 +147,9 @@ class Application extends \Phalcon\Mvc\Application
             $router = new \Phalcon\Mvc\Router(FALSE);
 
             $router->notFound(array(
-                'namespace' => 'FreeForAll\Application\Controllers',
+                'namespace'  => 'FreeForAll\Application\Controllers',
                 'controller' => 'error',
-                'action' => 'notFound',
+                'action'     => 'notFound',
             ));
             
             $router->removeExtraSlashes(TRUE);
@@ -136,7 +174,7 @@ class Application extends \Phalcon\Mvc\Application
         foreach ($modulesInfo as $moduleName => $moduleInfo) {
             $modules[$moduleName] = array(
                 'className' => $moduleInfo['infoClassName'],
-                'path' => $moduleInfo['infoFilename'],
+                'path'      => $moduleInfo['infoFilename'],
             );
         }
         
