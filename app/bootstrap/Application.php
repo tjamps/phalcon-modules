@@ -30,7 +30,7 @@ namespace FreeForAll;
  */
 class Application extends \Phalcon\Mvc\Application
 {
-	
+    
     /**
      * Bootstrap the current application.
      * 
@@ -80,7 +80,7 @@ class Application extends \Phalcon\Mvc\Application
 
         $loader->registerNamespaces(array(
             'FreeForAll\Application\Controllers' => APP_PATH . '/controllers',
-        	'FreeForAll\Application\Utils' => APP_PATH . '/utils',
+            'FreeForAll\Application\Utils' => APP_PATH . '/utils',
         ))->register();
     }
     
@@ -106,20 +106,20 @@ class Application extends \Phalcon\Mvc\Application
         
         
         $di->set('router', function() {
-        	$router = new \Phalcon\Mvc\Router(FALSE);
+            $router = new \Phalcon\Mvc\Router(FALSE);
 
-	    	$router->notFound(array(
-	    		'namespace' => 'FreeForAll\Application\Controllers',
-	    		'controller' => 'error',
-	    		'action' => 'notFound',
-	    	));
-	    	
-	    	$router->removeExtraSlashes(TRUE);
-	    	
-	    	// Add modules custom routes.
-	    	$this->mountModulesRoutes($router);
-	    	
-	    	return $router;
+            $router->notFound(array(
+                'namespace' => 'FreeForAll\Application\Controllers',
+                'controller' => 'error',
+                'action' => 'notFound',
+            ));
+            
+            $router->removeExtraSlashes(TRUE);
+            
+            // Add modules custom routes.
+            $this->mountModulesRoutes($router);
+            
+            return $router;
         });
         
         $this->setDI($di);
@@ -130,17 +130,17 @@ class Application extends \Phalcon\Mvc\Application
      */
     private function registerApplicationModules()
     {
-    	$modules = array();
-    	$modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
-    	 
-    	foreach ($modulesInfo as $moduleName => $moduleInfo) {
-    		$modules[$moduleName] = array(
-    			'className' => $moduleInfo['infoClassName'],
-    			'path' => $moduleInfo['infoFilename'],
-    		);
-    	}
-    	
-    	$this->registerModules($modules);
+        $modules = array();
+        $modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
+         
+        foreach ($modulesInfo as $moduleName => $moduleInfo) {
+            $modules[$moduleName] = array(
+                'className' => $moduleInfo['infoClassName'],
+                'path' => $moduleInfo['infoFilename'],
+            );
+        }
+        
+        $this->registerModules($modules);
     }
     
     /**
@@ -150,14 +150,14 @@ class Application extends \Phalcon\Mvc\Application
      */
     private function mountModulesRoutes($router)
     {
-    	$modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
-    	
-    	foreach ($modulesInfo as $module) {
-    		if (isset($module['routeFilename'])) {
-    			require $module['routeFilename'];
-    			$router->mount(new $module['routeClassName']);
-    		}
-    	}
+        $modulesInfo = \FreeForAll\Application\Utils\Modules::getModulesInfo();
+        
+        foreach ($modulesInfo as $module) {
+            if (isset($module['routeFilename'])) {
+                require $module['routeFilename'];
+                $router->mount(new $module['routeClassName']);
+            }
+        }
     }
 }
 

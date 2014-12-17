@@ -35,21 +35,21 @@ class ModuleInfo
      */
     public function registerAutoloaders($di)
     {
-    	$loader = new \Phalcon\Loader();
-    	$loader->registerNamespaces(array(
-    		'FreeForAll\Modules\Core\Controllers' => MODULES_PATH . '/core/controllers'
-    	))->register();
+        $loader = new \Phalcon\Loader();
+        $loader->registerNamespaces(array(
+            'FreeForAll\Modules\Core\Controllers' => MODULES_PATH . '/core/controllers'
+        ))->register();
     }
     
     /**
      * Register module services.
      * 
      * @param \Phalcon\DI $di
-     * 		Project Dependency Injection object.
+     *      Project Dependency Injection object.
      */
     public function registerServices($di)
     {
-    	
+        
     }
 }
 

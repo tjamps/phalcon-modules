@@ -32,6 +32,6 @@ class IndexController extends ControllerBase
 {
    public function indexAction()
    {
-		echo 'Core::IndexController::indexAction';
+        echo 'Core::IndexController::indexAction';
    }
 }

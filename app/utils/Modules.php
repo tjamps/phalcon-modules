@@ -30,90 +30,90 @@ namespace FreeForAll\Application\Utils;
  */
 class Modules
 {
-	/**
-	 * @var array
-	 * 		Stores module information.
-	 */
-	static $info = NULL;
-	
-	/**
-	 * Get all available modules information.
-	 * 
-	 * @param boolean $reset
-	 * 		(optional) if true, the information is processed,
-	 * 		wether it is available or not.
-	 * 		Defaults to false.
-	 * 
-	 * @return array
-	 */
-	public static function getModulesInfo($reset = FALSE)
-	{
-		if (! isset(self::$info) || $reset) {
-			$directoryNames = self::getModuleDirectoriesNames();
-			
-			foreach ($directoryNames as $directoryName) {
-				$moduleName = ucfirst($directoryName);
-				
-				$moduleNamespace = 'FreeForAll\Modules\\' . $moduleName;
-				
-				$moduleInfoFilename = MODULES_PATH. '/' . $directoryName . '/ModuleInfo.php';
-				$moduleInfoClassName = $moduleNamespace . '\ModuleInfo';
-				
-				// Test if the module Routes.php file exists.
-				$routeFilename = MODULES_PATH . '/' . $directoryName . '/Routes.php';
-				if (file_exists($routeFilename)) {
-					$routeClassName = $moduleNamespace . '\Routes';
-				}
-				else {
-					$routeFilename = NULL;
-					$routeClassName = NULL;
-				}
-				// TODO: Test if the module config/config.ini file exists.
-				
-				self::$info[$directoryName] = array(
-					'name' => $moduleName,
-					'namespace' => $moduleNamespace,
-					'infoFilename' => $moduleInfoFilename,
-					'infoClassName' => $moduleInfoClassName,
-					'routeFilename' => $routeFilename,
-					'routeClassName' => $routeClassName,
-				);
-			}
-		}
-		
-		return self::$info;
-	}
-	
-	
-	/**
-	 * Scan module directories.
-	 * 
-	 * A directory is considered a module directory if
-	 * it contains a "ModuleInfo.php" file.
-	 * 
-	 * @return array
-	 */
-	private static function getModuleDirectoriesNames()
-	{
-		$names = array();
-		
-		if (is_dir(MODULES_PATH)) {
-			$directoryContent = scandir(MODULES_PATH);
-			foreach ($directoryContent as $entry) {
-				$entryPath = MODULES_PATH . '/' . $entry;
-				$moduleInfoFilename = $entryPath . '/ModuleInfo.php';
-				
-				if ($entry !== '.' && $entry !== '..' && is_dir($entryPath) && file_exists($moduleInfoFilename)) {
-					$names[] = $entry;
-				}
-			}
-		}
-		
-		sort($names);
-		
-		return $names;
-	}
-	
+    /**
+     * @var array
+     *      Stores module information.
+     */
+    static $info = NULL;
+    
+    /**
+     * Get all available modules information.
+     * 
+     * @param boolean $reset
+     *      (optional) if true, the information is processed,
+     *      wether it is available or not.
+     *      Defaults to false.
+     * 
+     * @return array
+     */
+    public static function getModulesInfo($reset = FALSE)
+    {
+        if (! isset(self::$info) || $reset) {
+            $directoryNames = self::getModuleDirectoriesNames();
+            
+            foreach ($directoryNames as $directoryName) {
+                $moduleName = ucfirst($directoryName);
+                
+                $moduleNamespace = 'FreeForAll\Modules\\' . $moduleName;
+                
+                $moduleInfoFilename = MODULES_PATH. '/' . $directoryName . '/ModuleInfo.php';
+                $moduleInfoClassName = $moduleNamespace . '\ModuleInfo';
+                
+                // Test if the module Routes.php file exists.
+                $routeFilename = MODULES_PATH . '/' . $directoryName . '/Routes.php';
+                if (file_exists($routeFilename)) {
+                    $routeClassName = $moduleNamespace . '\Routes';
+                }
+                else {
+                    $routeFilename = NULL;
+                    $routeClassName = NULL;
+                }
+                // TODO: Test if the module config/config.ini file exists.
+                
+                self::$info[$directoryName] = array(
+                    'name' => $moduleName,
+                    'namespace' => $moduleNamespace,
+                    'infoFilename' => $moduleInfoFilename,
+                    'infoClassName' => $moduleInfoClassName,
+                    'routeFilename' => $routeFilename,
+                    'routeClassName' => $routeClassName,
+                );
+            }
+        }
+        
+        return self::$info;
+    }
+    
+    
+    /**
+     * Scan module directories.
+     * 
+     * A directory is considered a module directory if
+     * it contains a "ModuleInfo.php" file.
+     * 
+     * @return array
+     */
+    private static function getModuleDirectoriesNames()
+    {
+        $names = array();
+        
+        if (is_dir(MODULES_PATH)) {
+            $directoryContent = scandir(MODULES_PATH);
+            foreach ($directoryContent as $entry) {
+                $entryPath = MODULES_PATH . '/' . $entry;
+                $moduleInfoFilename = $entryPath . '/ModuleInfo.php';
+                
+                if ($entry !== '.' && $entry !== '..' && is_dir($entryPath) && file_exists($moduleInfoFilename)) {
+                    $names[] = $entry;
+                }
+            }
+        }
+        
+        sort($names);
+        
+        return $names;
+    }
+    
 }
 
 

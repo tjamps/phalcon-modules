@@ -30,23 +30,23 @@ namespace FreeForAll\Modules\Core;
  */
 class Routes extends \Phalcon\Mvc\Router\Group
 {
-	/**
-	 * 
-	 */
-	public function initialize()
-	{
-		$this->setPrefix('/core');
+    /**
+     * 
+     */
+    public function initialize()
+    {
+        $this->setPrefix('/core');
 
-		$this->setPaths(array(
-			'module' => 'core',
-			'namespace' => 'FreeForAll\Modules\Core\Controllers',
-			'controller' => 'index',
-		));
-		
-		$this->addGet('', array(
-			'action' => 'index',
-		));
-	}
+        $this->setPaths(array(
+            'module' => 'core',
+            'namespace' => 'FreeForAll\Modules\Core\Controllers',
+            'controller' => 'index',
+        ));
+        
+        $this->addGet('', array(
+            'action' => 'index',
+        ));
+    }
 }
 
 
