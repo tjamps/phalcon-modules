@@ -22,10 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo -e "\e[32mFixing tabs for all PHP files...\e[0m"
+echo -e "\e[32m++ Fixing tabs for all PHP files...\e[0m"
 for file in $(find . -name "*.php");
 do
-    echo -e "\e[33m+ $file\e[0m"
+    echo -e "\e[33m + $file\e[0m"
     expand -t 4 "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
 done
-echo -e "\e[32mDone.\e[0m"
+echo -e "\e[32m++ Done.\e[0m"
